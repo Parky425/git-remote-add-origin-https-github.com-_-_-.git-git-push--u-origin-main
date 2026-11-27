@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Student Task Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-view="home" aria-label="Student Task Tracker — главная">
+        <span class="brand-mark" aria-hidden="true">ST</span>
+        <span class="brand-name">student<span>task</span></span>
+      </a>
+
+      <div class="sidebar-label">МЕНЮ</div>
+      <nav class="main-nav" aria-label="Основная навигация">
+        <button class="nav-link active" type="button" data-view="home"><span class="nav-icon">⌂</span>Главная</button>
+        <button class="nav-link" type="button" data-view="all"><span class="nav-icon">▤</span>Все задачи</button>
+        <button class="nav-link" type="button" data-view="today"><span class="nav-icon">◷</span>Сегодня</button>
+        <button class="nav-link" type="button" data-view="upcoming"><span class="nav-icon">▦</span>Предстоящие</button>
+        <button class="nav-link" type="button" data-view="completed"><span class="nav-icon">✓</span>Выполненные</button>
+        <button class="nav-link" type="button" data-view="subjects"><span class="nav-icon">▧</span>Предметы</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="nav-link" type="button" data-view="settings"><span class="nav-icon">⚙</span>Настройки</button>
+        <div class="sidebar-note">
+          <span class="note-icon">✦</span>
+          <p>Маленькие шаги<br>ведут к большим целям.</p>
+        </div>
+        <div class="profile">
+          <span class="avatar">С</span>
+          <span><strong>Студент</strong><small>Мой планировщик</small></span>
+          <span class="profile-more">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+        <div class="breadcrumb"><span>Рабочее пространство</span><b>/</b><strong id="breadcrumb-current">Главная</strong></div>
+        <div class="topbar-actions">
+          <span class="today-label" id="topbar-date"></span>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему"><span>☾</span></button>
+          <button class="avatar top-avatar" type="button" aria-label="Профиль студента">С</button>
+        </div>
+      </header>
+
+      <section class="page-content" id="page-content" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-heading">
+        <div>
+          <p class="eyebrow">ПЛАНИРОВАНИЕ</p>
+          <h2 id="modal-title">Новая задача</h2>
+        </div>
+        <button class="icon-button" id="close-modal" type="button" aria-label="Закрыть">×</button>
+      </div>
+      <form id="task-form" novalidate>
+        <input id="task-id" type="hidden">
+        <label class="form-field">Название задачи
+          <input id="task-title" name="title" type="text" maxlength="100" placeholder="Например, подготовить лабораторную" required>
+        </label>
+        <label class="form-field">Описание <span class="optional">(необязательно)</span>
+          <textarea id="task-description" name="description" rows="3" maxlength="500" placeholder="Добавьте детали или заметки"></textarea>
+        </label>
+        <div class="form-row">
+          <label class="form-field">Предмет
+            <select id="task-subject" name="subject" required></select>
+          </label>
+          <label class="form-field">Дата выполнения
+            <input id="task-due-date" name="dueDate" type="date" required>
+          </label>
+        </div>
+        <label class="form-field">Приоритет
+          <select id="task-priority" name="priority">
+            <option value="low">Низкий</option>
+            <option value="medium" selected>Средний</option>
+            <option value="high">Высокий</option>
+          </select>
+        </label>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+        <div class="modal-actions">
+          <button class="button button-quiet" id="cancel-modal" type="button">Отмена</button>
+          <button class="button button-primary" type="submit" id="save-task">Сохранить задачу</button>
+        </div>
+      </form>
+      <div class="task-details" id="task-details" hidden></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
